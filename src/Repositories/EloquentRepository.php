@@ -791,7 +791,9 @@ class EloquentRepository extends Repository implements TreeRepository
                             Arr::forget($related, $relation->getModel()->getKeyName());
                         }
 
-                        $instance->fill($related);
+                        foreach ($related as $column => $value) {
+                            $instance->setAttribute($column, $value);
+                        }
 
                         $instance->save();
                     }
